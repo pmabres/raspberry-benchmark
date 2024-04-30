@@ -61,7 +61,7 @@ object Build : BuildType({
                 apt -y install sysbench
                 sysbench run --test=cpu --num-threads=4
             """.trimIndent()
-            dockerImage = "ubuntu:jammy"
+            dockerImage = "ubuntu:latest"
         }
     }
 
