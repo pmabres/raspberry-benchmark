@@ -17,12 +17,13 @@ object Build : BuildType({
         script {
             id = "simpleRunner"
             scriptContent = """
+                apt update
+                apt -y install curl
                 curl -s https://packagecloud.io/install/repositories/akopytov/sysbench/script.deb.sh | sudo bash
-                sudo apt -y install sysbench
+                apt -y install sysbench
                 sysbench run --test=cpu --num-threads=4
             """.trimIndent()
             dockerImage = "alpine:3.19"
-            dockerImagePlatform = ScriptBuildStep.ImagePlatform.Linux
         }
     }
     triggers {
