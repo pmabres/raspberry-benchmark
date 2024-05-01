@@ -59,9 +59,9 @@ object Build : BuildType({
                 apt -y install curl
                 curl -s https://packagecloud.io/install/repositories/akopytov/sysbench/script.deb.sh | bash
                 apt -y install sysbench
-                sysbench run --test=cpu --num-threads=4
+                sysbench cpu --threads=4 run
             """.trimIndent()
-            dockerImage = "ubuntu:latest"
+            dockerImage = "ubuntu:jammy"
         }
     }
 
