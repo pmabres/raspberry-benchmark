@@ -55,14 +55,23 @@ object Build : BuildType({
         script {
             id = "simpleRunner"
             scriptContent = """
-                apt update
-                apt -y install curl
-                curl -s https://packagecloud.io/install/repositories/akopytov/sysbench/script.deb.sh | bash
-                apt -y install sysbench
-                sysbench cpu --threads=4 run
+                pip install evdev
+                python ./listUsbDevices.py
             """.trimIndent()
-            dockerImage = "ubuntu:jammy"
+            dockerImage = "python:latest"
+            dockerRunParameters = "--privileged -v /dev:/dev"
         }
+        // script {
+        //     id = "simpleRunner"
+        //     scriptContent = """
+        //         apt update
+        //         apt -y install curl
+        //         curl -s https://packagecloud.io/install/repositories/akopytov/sysbench/script.deb.sh | bash
+        //         apt -y install sysbench
+        //         sysbench cpu --threads=4 run
+        //     """.trimIndent()
+        //     dockerImage = "ubuntu:jammy"
+        // }
     }
 
     triggers {
