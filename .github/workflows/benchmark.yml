@@ -17,7 +17,7 @@ jobs:
     # The type of runner that the job will run on
     runs-on: [self-hosted, raspberry]
     container:
-      image: ubuntu:jammy
+      image: python:latest
       options: --privileged
       volumes:
         - /dev:/dev
