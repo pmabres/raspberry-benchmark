@@ -23,6 +23,10 @@ jobs:
         - /dev:/dev
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: Install requirements for actions/checkout
+        run: |
+          apt-get update
+          apt-get install build-essential -y
       - uses: actions/checkout@v4
       # Runs a set of commands using the runners shell
       - name: Performs rpi benchmark
