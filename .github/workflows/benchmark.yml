@@ -18,13 +18,20 @@ jobs:
     runs-on: [self-hosted, raspberry]
     container:
       image: ubuntu:jammy
+      options: --privileged
+      volumes:
+        - /dev:/dev
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - uses: actions/checkout@v4
       # Runs a set of commands using the runners shell
       - name: Performs rpi benchmark
         run: |
-          apt update
-          apt -y install curl
-          curl -s https://packagecloud.io/install/repositories/akopytov/sysbench/script.deb.sh | bash
-          apt -y install sysbench
-          sysbench cpu --threads=4 run
+          pip install evdev
+          python ./listUsbDevices.py
+        # run: |
+        #   apt update
+        #   apt -y install curl
+        #   curl -s https://packagecloud.io/install/repositories/akopytov/sysbench/script.deb.sh | bash
+        #   apt -y install sysbench
+        #   sysbench cpu --threads=4 run
